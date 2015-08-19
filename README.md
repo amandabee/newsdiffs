@@ -9,7 +9,7 @@ Authors: Eric Price (ecprice@mit.edu), Greg Price (gnprice@gmail.com),
  and Jennifer 8. Lee (jenny@jennifer8lee.com)
 
 This is free software under the MIT/Expat license; see LICENSE.
-The project's source code lives at http://github.com/ecprice/newsdiffs .
+The project's source code lives at <http://github.com/ecprice/newsdiffs>.
 
 
 Requirements
@@ -20,29 +20,30 @@ You need to have installed on your local machine
 * Python 2.6 or later
 * Django and other Python libraries
 
-On a Debian- or Ubuntu-based system, it may suffice (untested) to run
-  $ sudo apt-get install git-core python-django python-django-south python-simplejson
+On a Debian- or Ubuntu-based system, it may suffice (untested) to run  
+`$ sudo apt-get install git-core python-django python-django-south python-simplejson`
 
 On Mac OS, the easiest way may be to install pip:
-  http://www.pip-installer.org/en/latest/installing.html
-and then
-  $ pip install Django
+  <http://www.pip-installer.org/en/latest/installing.html>
+and then  
+  `$ pip install Django`
 
 
 Initial setup
 -------------
 
-  $ python website/manage.py syncdb && python website/manage.py migrate
-  $ mkdir articles
+    $ python website/manage.py syncdb && python website/manage.py migrate   
+    $ mkdir articles
 
 
 Running NewsDiffs Locally
 -------------------------
 
 Do the initial setup above.  Then to start the webserver for testing:
-  $ python website/manage.py runserver
 
-and visit http://localhost:8000/
+    $ python website/manage.py runserver
+
+and visit <http://localhost:8000/>
 
 
 Running the scraper
@@ -51,7 +52,8 @@ Running the scraper
 Do the initial setup above.  You will also need additional Python
 libraries; on a Debian- or Ubuntu-based system, it may suffice
 (untested) to run
-  $ sudo apt-get install python-bs4 python-beautifulsoup
+
+    $ sudo apt-get install python-bs4 python-beautifulsoup
 
 on a Mac, you will want something like
 
