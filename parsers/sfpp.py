@@ -1,15 +1,14 @@
 from baseparser import BaseParser
-from BeautifulSoup import BeautifulSoup
+import bs4
+import re
 
 class SFPPParser(BaseParser):
     domains = ['www.sfpublicpress.org']
 
-    feeder_pat   = '^http://www.sfpublicpress.org/*'
-    feeder_pages = ['http://sfpublicpress.org/news/searise/2015-07/major-sf-bayfront-developments-advance-despite-sea-rise-warnings'        ]
-
+    feeder_pat   = '^http://sfpublicpress.org/news/searise/2015-07/' # Look for links matching this regular expression
+    feeder_pages = ['http://sfpublicpress.org/searise'] # on these pages
 
     def _parse(self, html):
-
             soup = bs4.BeautifulSoup(html)
             self.meta = soup.findAll('meta')
             self.title = soup.find('h1', attrs={'class':'title'}).string
