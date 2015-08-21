@@ -18,11 +18,7 @@ def strip_prefix(string, prefix):
         string = string[len(prefix):]
     return string
 
-PublicationDict = {'www.nytimes.com': 'NYT',
-                   'edition.cnn.com': 'CNN',
-                   'www.bbc.co.uk': 'BBC',
-                   'www.politico.com': 'Politico',
-                   'www.washingtonpost.com': 'Washington Post',
+PublicationDict = {'www.washingtonpost.com': 'Washington Post',
                    'www.sfpublicpress.org': 'Public Press'
                    }
 
@@ -69,7 +65,7 @@ class Article(models.Model):
         return delta.seconds // 60 + 24*60*delta.days
 
 
-def Version(models.Model):
+class Version(models.Model):
     class Meta:
         db_table = 'version'
         get_latest_by = 'date'
@@ -85,7 +81,7 @@ def Version(models.Model):
     def text(self):
         try:
             return subprocess.check_output([GIT_PROGRAM, 'show',
-                                            self.v+':'+self.article.filename()],
+                                           self.v+':'+self.article.filename()],
                                            cwd=self.article.full_git_dir)
         except subprocess.CalledProcessError as e:
             return None
@@ -103,7 +99,7 @@ def Version(models.Model):
     diff_info = property(get_diff_info, set_diff_info)
 
 
-def Upvote(models.Model):
+class Upvote(models.Model):
     class Meta:
         db_table = 'upvotes'
 
