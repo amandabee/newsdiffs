@@ -12,6 +12,7 @@ GIT_DIR = ROOT_DIR+'/articles/'
 
 GIT_PROGRAM = 'git'
 
+
 def strip_prefix(string, prefix):
     if string.startswith(prefix):
         string = string[len(prefix):]
@@ -22,9 +23,11 @@ PublicationDict = {'www.nytimes.com': 'NYT',
                    'www.bbc.co.uk': 'BBC',
                    'www.politico.com': 'Politico',
                    'www.washingtonpost.com': 'Washington Post',
+                   'www.sfpublicpress.org': 'Public Press'
                    }
 
 ancient = datetime(1901, 1, 1)
+
 
 # Create your models here.
 class Article(models.Model):
@@ -65,7 +68,8 @@ class Article(models.Model):
         delta = datetime.now() - self.last_check
         return delta.seconds // 60 + 24*60*delta.days
 
-class Version(models.Model):
+
+def Version(models.Model):
     class Meta:
         db_table = 'version'
         get_latest_by = 'date'
@@ -73,7 +77,7 @@ class Version(models.Model):
     article = models.ForeignKey('Article', null=False)
     v = models.CharField(max_length=255, blank=False, unique=True)
     title = models.CharField(max_length=255, blank=False)
-    byline = models.CharField(max_length=255,blank=False)
+    byline = models.CharField(max_length=255, blank=False)
     date = models.DateTimeField(blank=False)
     boring = models.BooleanField(blank=False, default=False)
     diff_json = models.CharField(max_length=255, null=True)
@@ -90,6 +94,7 @@ class Version(models.Model):
         if self.diff_json is None:
             return {}
         return json.loads(self.diff_json)
+
     def set_diff_info(self, val=None):
         if val is None:
             self.diff_json = None
@@ -98,7 +103,7 @@ class Version(models.Model):
     diff_info = property(get_diff_info, set_diff_info)
 
 
-class Upvote(models.Model):
+def Upvote(models.Model):
     class Meta:
         db_table = 'upvotes'
 
@@ -111,6 +116,7 @@ class Upvote(models.Model):
 
 # subprocess.check_output appeared in python 2.7.
 # backport it to 2.6
+
 def check_output(*popenargs, **kwargs):
     r"""Run command with arguments and return its output as a byte string.
 
