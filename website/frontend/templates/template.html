@@ -4,10 +4,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>NewsDiffs | {% block title %}Tracking Online News Articles Over Time{% endblock %}</title>
+    <title>NewsDiffs | {% block title %}Tracking SF Public Press Election Coverage{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NewsDiffs tracks changes in online news articles over time">
-    <meta name="author" content="Eric Price, Greg Price, Jennifer 8. Lee">
+    <meta name="description" content="We're using NewsDiffs to show you what's changed on our election pages.">
+    <meta name="author" content="Amanda Hickman, SF Public Press">
 
     <!-- Le styles -->
 
@@ -47,7 +47,7 @@
 
       {% block head %} {% endblock %}
      <!-- <script src="{% url 'static' 'js/jquery.js' %}"></script> -->
-     <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->         
+     <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
 	<script src="{% url 'static' 'js/bootstrap.js'%}"></script>
 
   </head>
@@ -86,16 +86,16 @@
     <div class="container">
       {% block content %} {% endblock content%}
 <hr>
- {% block footer %} 
-	<footer>
-        <p>&copy; <a href="{% url 'contact' %}">NewsDiffs</a> 2012 | <a href="http://twitter.com/newsdiffs">@newsdiffs</a> | <a href="{% url 'subscribe' %}">Subscribe</a> </p>
-        </footer>
+ {% block footer %}
+  	<footer>
+        <p><a href="://twitter.com/sfpublicpress">@sfpublicpress</a> | <a href="{% url 'subscribe' %}">Back to the Ballot</a> | software by <a href="://twitter.com/newsdiffs">@newsdiffs</a></p>
+    </footer>
 {% endblock footer %}
     </div>
 
 
     </div> <!-- /container -->
-		
+
     <!-- Bootstrap javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
