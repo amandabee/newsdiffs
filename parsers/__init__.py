@@ -20,6 +20,7 @@ for parsername in parsers:
     for domain in parser.domains:
         parser_dict[domain] = parser
 
+
 def get_parser(url):
     return parser_dict[url.split('/')[2]]
 
