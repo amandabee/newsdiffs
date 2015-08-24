@@ -37,8 +37,7 @@ def Http400():
 def get_first_update(source):
     if source is None:
         source = ''
-    updates = models.Article.objects.order_by('last_update').filter(last_update__gt=datetime.datetime(1990, 1, 1, 0, 0),
-                                                                    url__contains=source)
+    updates = models.Article.objects.order_by('last_update').filter(last_update__gt=datetime.datetime(1990, 1, 1, 0, 0), url__contains=source)
     try:
         return updates[0].last_update
     except IndexError:
@@ -65,14 +64,14 @@ def get_articles(source=None, distance=0):
 
     print 'Asking query'
     version_query = '''SELECT
-    version.id, version.article_id, version.v, version.title,
-      version.byline, version.date, version.boring, version.diff_json,
-      T.age as age,
-      Articles.url as a_url, Articles.initial_date as a_initial_date,
-      Articles.last_update as a_last_update, Articles.last_check as a_last_check
+    version.id, version.article_id, version.v, version.title, version.byline,
+    version.date, version.boring, version.diff_json, T.age as age, Articles.url
+    as a_url, Articles.initial_date as a_initial_date, Articles.last_update
+    as a_last_update, Articles.last_check as a_last_check
     FROM version,
-     (SELECT Articles.id as article_id, MAX(T3.date) AS age, COUNT(T3.id) AS num_vs
-      FROM Articles LEFT OUTER JOIN version T3 ON (Articles.id = T3.article_id)
+     (SELECT Articles.id as article_id, MAX(T3.date) AS age, COUNT(T3.id)
+      AS num_vs FROM Articles LEFT OUTER JOIN version T3 ON
+        (Articles.id = T3.article_id)
       WHERE (T3.boring=0) GROUP BY Articles.id
       HAVING (age > %s  AND age < %s  AND num_vs > 1 )) T, Articles
     WHERE (version.article_id = Articles.id) and
@@ -103,7 +102,8 @@ def get_articles(source=None, distance=0):
             continue
         rowinfo = get_rowinfo(article, versions)
         articles.append((article, versions[-1], rowinfo))
-    print 'Queries: ', len(django.db.connection.queries), django.db.connection.queries
+    print 'Queries: ', len(django.db.connection.queries),
+    django.db.connection.queries
     articles.sort(key=lambda x: x[-1][0][1].date, reverse=True)
     return articles
 
@@ -233,8 +233,8 @@ def diffview(request, vid1, vid2, urlarg):
     for i in range(2):
         if all(x[i] for x in adjacent_versions):
             diffl = reverse('diffview', kwargs=dict(vid1=adjacent_versions[0][i].id,
-                                                    vid2=adjacent_versions[1][i].id,
-                                                    urlarg=article.filename()))
+                            vid2=adjacent_versions[1][i].id,
+                            urlarg=article.filename()))
             links.append(diffl)
         else:
             links.append('')
@@ -318,12 +318,13 @@ def article_history(request, urlarg=''):
             return HttpResponse('Bug!')
 
     if len(urlarg) == 0:
-        return HttpResponseRedirect(reverse(article_history, args=[article.filename()]))
+        return HttpResponseRedirect(reverse(article_history,
+                                            args=[article.filename()]))
 
     rowinfo = get_rowinfo(article)
-    return render_to_response('article_history.html', {'article': article,
-                                                       'versions': rowinfo,
-                                                       'display_search_banner': came_from_search_engine(request),
+    return render_to_response('article_history.html', {'article':article,
+                                                       'versions':rowinfo,
+            'display_search_banner': came_from_search_engine(request),
                                                        })
 
 
@@ -356,7 +357,9 @@ def upvote(request):
     diff_v2 = request.REQUEST.get('diff_v2')
     remote_ip = request.META.get('REMOTE_ADDR')
     article_id = Article.objects.get(url=article_url).id
-    models.Upvote(article_id=article_id, diff_v1=diff_v1, diff_v2=diff_v2, creation_time=datetime.datetime.now(), upvoter_ip=remote_ip).save()
+    models.Upvote(article_id=article_id, diff_v1=diff_v1, diff_v2=diff_v2,
+                  creation_time=datetime.datetime.now(),
+                  upvoter_ip=remote_ip).save()
     return render_to_response('upvote.html')
 
 
