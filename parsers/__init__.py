@@ -16,7 +16,8 @@ parser_dict = {}
 # Import the parsers and fill in parser_dict: domain -> parser
 for parsername in parsers:
     module, classname = parsername.rsplit('.', 1)
-    parser = getattr(__import__(module, globals(), fromlist=[classname]), classname)
+    parser = getattr(__import__(module, globals(),
+                                fromlist=[classname]), classname)
     for domain in parser.domains:
         parser_dict[domain] = parser
 
