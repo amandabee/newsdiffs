@@ -95,8 +95,6 @@ def get_articles(source=None, distance=0):
         if not rx.match(url):
             print 'REJECTING', url
             continue
-        if 'blogs.nytimes.com' in url:  # XXX temporary
-            continue
 
         if len(versions) < 2:
             continue
@@ -108,8 +106,7 @@ def get_articles(source=None, distance=0):
     return articles
 
 
-SOURCES = '''nytimes.com cnn.com politico.com washingtonpost.com
-bbc.co.uk sfpublicpress.org'''.split()
+SOURCES = '''sfpublicpress.org, sfgate.com'''.split()
 
 
 def is_valid_domain(domain):
