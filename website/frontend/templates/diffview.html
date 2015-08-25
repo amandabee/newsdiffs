@@ -20,18 +20,18 @@
 </script>
 
   <style type="text/css">
-  del {
-    background-color: #ffa0a0;
-  }
-  ins {
-    background-color: #a0ffa0;
-  }
+    del {
+      background-color: #ffa0a0;
+    }
+    ins {
+      background-color: #a0ffa0;
+    }
   </style>
 
 {% endblock head %}
 
 {% block content %}
-{% if display_search_banner %}
+  {% if display_search_banner %}
     <style>
       .search-banner h3{
         text-align: center;
@@ -46,15 +46,13 @@
       }
     </style>
 
-<div class="search-banner">
-<h3>Welcome to <a href="{% url 'root' %}">NewsDiffs</a>!</h3>
+    <div class="search-banner">
+      <h3>Welcome to <a href="{% url 'root' %}">our change log</a>!</h3>
 
-NewsDiffs tracks post-publication changes to articles in online news
-media.  Below, you can see edits made to an article after it was
-published.  You can browse through many such edits in our <a href=
-"{% url 'browse' %}" > archive</a>.
-</div>
-{% endif %}
+      <p>NewsDiffs tracks post-publication changes to articles in online news media.  At the SF Public Press, we're using NewsDiffs to expose changes we make to our elections coverage. Take a look through our <a href=
+      "{% url 'browse' %}" > archive</a> to see how our profiles have changed.</p>
+    </div>
+  {% endif %}
 
     <h2>Comparing: {{title}}</h2>
     <h3><a href="{{article_url}}">{{article_url}}</a></h3>
@@ -77,14 +75,6 @@ published.  You can browse through many such edits in our <a href=
       {% endif %}
     </p>
 
-<!--
-Are these changes interesting?   <form action="{% url 'upvote' %}" method=POST>
-      <input type=hidden name=article_url value={{article_url}}>
-      <input type=hidden name=diff_v1 value={{v1}}>
-      <input type=hidden name=diff_v2 value={{v2}}>
-      <input type=submit name=submit value="Yes">
-    </form>
--->
 <hr>
     <div>
       <div id="compare">
