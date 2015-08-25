@@ -188,7 +188,8 @@ def old_diffview(request):
 
     return redirect(reverse('diffview', kwargs=dict(vid1=v1.id,
                                                     vid2=v2.id,
-                                                    urlarg=article.filename())),
+                                                    urlarg=article.filename()
+                                                    )),
                     permanent=True)
 
 
@@ -312,7 +313,8 @@ def article_history(request, urlarg=''):
         article = Article.objects.get(url=url)
     except Article.DoesNotExist:
         try:
-            return render_to_response('article_history_missing.html', {'url': url})
+            return render_to_response('article_history_missing.html',
+                                      {'url': url})
         except (TypeError, ValueError):
             # bug in django + mod_rewrite can cause this. =/
             return HttpResponse('Bug!')
@@ -322,8 +324,8 @@ def article_history(request, urlarg=''):
                                             args=[article.filename()]))
 
     rowinfo = get_rowinfo(article)
-    return render_to_response('article_history.html', {'article':article,
-                                                       'versions':rowinfo,
+    return render_to_response('article_history.html', {'article': article,
+                                                       'versions': rowinfo,
             'display_search_banner': came_from_search_engine(request),
                                                        })
 
