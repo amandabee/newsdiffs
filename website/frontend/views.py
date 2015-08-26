@@ -16,11 +16,11 @@ from django.views.decorators.cache import cache_page
 OUT_FORMAT = '%B %d, %Y at %l: %M%P EDT'
 
 SEARCH_ENGINES = """
-http: //www.ask.com
-http: //www.google
-https: //www.google
+http://www.ask.com
+http://www.google
+https://www.google
 search.yahoo.com
-http: //www.bing.com
+http://www.bing.com
 """.split()
 
 
@@ -37,7 +37,8 @@ def Http400():
 def get_first_update(source):
     if source is None:
         source = ''
-    updates = models.Article.objects.order_by('last_update').filter(last_update__gt=datetime.datetime(1990, 1, 1, 0, 0), url__contains=source)
+    updates = models.Article.objects.order_by('last_update').filter(last_update__gt=datetime.datetime(1990, 1, 1, 0, 0),
+                                    url__contains=source)
     try:
         return updates[0].last_update
     except IndexError:
@@ -106,7 +107,7 @@ def get_articles(source=None, distance=0):
     return articles
 
 
-SOURCES = '''sfpublicpress.org, sfgate.com'''.split()
+SOURCES = '''sfpublicpress.org sfgate.com'''.split()
 
 
 def is_valid_domain(domain):
@@ -274,12 +275,12 @@ def prepend_http(url):
     url may look like
 
     www.nytimes.com
-    https: /www.nytimes.com    <- because double slashes get stripped
-    http: //www.nytimes.com
+    https:/www.nytimes.com    <- because double slashes get stripped
+    http://www.nytimes.com
     """
     components = url.split('/', 2)
     if len(components) <= 2 or '.' in components[0]:
-        components = ['http: ', '']+components
+        components = ['http:', '']+components
     elif components[1]:
         components[1: 1] = ['']
     return '/'.join(components)

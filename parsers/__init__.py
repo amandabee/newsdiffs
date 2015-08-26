@@ -9,6 +9,7 @@
 
 parsers = """
 sfpp.SFPPParser
+sfgate.SFGateParser
 """.split()
 
 parser_dict = {}

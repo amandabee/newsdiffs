@@ -69,9 +69,9 @@ def strip_whitespace(text):
 
 
 def parse_double_utf8(txt):
-    '''# from http://stackoverflow.com/questions/5842115/converting-a-string
+    '''from http://stackoverflow.com/questions/5842115/converting-a-string
     -which-contains-both-utf-8-encoded-bytestrings-and-codepoints
-    # Translate a unicode string containing utf8
+    Translate a unicode string containing utf8
     '''
     def parse(m):
         try:
