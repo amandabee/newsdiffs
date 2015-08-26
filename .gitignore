@@ -1,5 +1,7 @@
 /articles
 
+.ipynb_checkpoints
+*.ipynb
 *~
 *.py[co]
 
