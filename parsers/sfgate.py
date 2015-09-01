@@ -16,7 +16,11 @@ class SFGateParser(BaseParser):
     def _parse(self, html):
         soup = bs4.BeautifulSoup(html)
         self.meta = soup.findAll('meta')
-        self.title = soup.find('h1', attrs={'class': 'headline'}).string
+        elt = soup.find('h1', attrs={'class': 'headline'})
+        if elt is None:
+            self.real_article = False
+            return
+        self.title = elt.getText()
         self.byline = soup.find(attrs={'class': 'byline'}).text
         self.byline = re.sub('[\s]+', ' ', self.byline).strip()
         self.date = soup.find('h5', attrs={'class': 'timestamp'}).string
