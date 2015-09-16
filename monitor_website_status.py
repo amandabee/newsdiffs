@@ -7,13 +7,14 @@ from datetime import datetime, timedelta
 import dateutil.parser
 import subprocess
 
-WEBSITE = 'http://www.newsdiffs.org/browse/'
-if datetime.now().hour < 8: #Overnight, less frequent updates
+WEBSITE = 'https://sfpp-newsdiffs.herokuapp.com/'
+if datetime.now().hour < 8:  # Overnight, less frequent updates
     MAX_TIME = timedelta(minutes=120)
 else:
     MAX_TIME = timedelta(minutes=60)
-    
-EMAILS = 'ecprice@mit.edu jenny8lee@gmail.com price@mit.edu'.split()
+
+EMAILS = 'amanda@brooklynlocal.info'.split()
+
 
 def send_alert_email(subject, body):
     email = 'Subject: %s\n\n%s' % (subject, body)
@@ -43,12 +44,11 @@ if __name__ == '__main__':
         time_since_update = datetime.now() - update_time
         print 'Update time:', time_since_update
         if time_since_update > MAX_TIME:
-            send_alert_email('Trouble with newsdiffs.org',
+            send_alert_email('Trouble w/ https://sfpp-newsdiffs.herokuapp.com',
                              'No updates since %s\n%s is too long' %
                              (update_time, time_since_update))
     except Exception, e:
         import traceback
         traceback.print_exc()
-        send_alert_email('Trouble with newsdiffs.org',
+        send_alert_email('Trouble with https://sfpp-newsdiffs.herokuapp.com/',
                          'Cannot check website\n%s' % traceback.format_exc())
-
