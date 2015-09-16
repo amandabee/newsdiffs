@@ -37,8 +37,7 @@ def Http400():
 def get_first_update(source):
     if source is None:
         source = ''
-    updates = models.Article.objects.order_by('last_update').filter(last_update__gt=datetime.datetime(1990, 1, 1, 0, 0),
-                                    url__contains=source)
+    updates = models.Article.objects.order_by('last_update').filter(last_update__gt=datetime.datetime(1990, 1, 1, 0, 0), url__contains=source)
     try:
         return updates[0].last_update
     except IndexError:
