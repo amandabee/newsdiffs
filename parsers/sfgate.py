@@ -21,11 +21,14 @@ class SFGateParser(BaseParser):
             self.real_article = False
             return
         self.title = elt.getText()
-        self.byline = soup.find(attrs={'class': 'byline'}).text
-        self.byline = re.sub('[\s]+', ' ', self.byline).strip()
+        try:
+            self.byline = soup.find(attrs={'class': 'byline'}).text
+            self.byline = re.sub('[\s]+', ' ', self.byline).strip()
+        except:
+            self.byline = ""
         self.date = soup.find('h5', attrs={'class': 'timestamp'}).string
         self.date = re.sub('[\s]+', ' ', self.date).strip()
         p_tags = soup.findAll('p')[2:]
         real_p_tags = [p for p in p_tags if
-                     not p.findAll(attrs={'class': "twitter-follow-button"})]
+                       not p.findAll(attrs={'class': "twitter-follow-button"})]
         self.body = '\n'+'\n\n'.join([p.getText() for p in real_p_tags])
