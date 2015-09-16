@@ -3,10 +3,8 @@ NewsDiffs
 
 A website and framework that tracks changes in online news articles over time.
 
-Original installation at newsdiffs.org.
-A product of the Knight Mozilla MIT news hackathon in June 2012.
-Authors: Eric Price (ecprice@mit.edu), Greg Price (gnprice@gmail.com),
- and Jennifer 8. Lee (jenny@jennifer8lee.com)
+
+Based on the original installation at newsdiffs.org, which was a product of the Knight Mozilla MIT news hackathon in June 2012. Authors: Eric Price (ecprice@mit.edu), Greg Price (gnprice@gmail.com), and Jennifer 8. Lee (jenny@jennifer8lee.com)
 
 This is free software under the MIT/Expat license; see LICENSE.
 The project's source code lives at <http://github.com/ecprice/newsdiffs>.
@@ -33,7 +31,7 @@ On Mac OS, the easiest way may be to [install pip](http://www.pip-installer.org/
 Initial setup
 -------------
 
-    $ python website/manage.py syncdb && python website/manage.py migrate   
+    $ python website/manage.py syncdb && python website/manage.py migrate
     $ mkdir articles
 
 
