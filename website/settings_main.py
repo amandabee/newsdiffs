@@ -1,5 +1,7 @@
 # Django settings for the newsdiffs project.
 
+import os.path
+
 ALLOWED_HOSTS = ['*']
 
 DEBUG = False
