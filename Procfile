@@ -1,1 +1,1 @@
-web: python website/manage.py runserver
+web: gunicorn newsdiffs.wsgi --log-file -
