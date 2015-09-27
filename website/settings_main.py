@@ -14,7 +14,7 @@ ADMINS = (
 MANAGERS = ADMINS
 SERVER_EMAIL = "crons@velociraptor.info"
 
-
+WEBAPP_ROOT = os.path.dirname(os.path.abspath(__file__))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
