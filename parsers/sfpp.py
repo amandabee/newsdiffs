@@ -22,5 +22,6 @@ class SFPPParser(BaseParser):
         self.date = soup.find('div', attrs={'class': 'date-created'}).string
         self.date = re.sub('[\s]+', ' ', self.date).strip()
         p_tags = soup.findAll('p')[2:]
-        real_p_tags = [p for p in p_tags if not p.findAll(attrs={'class': "twitter-follow-button"})]
+        real_p_tags = [p for p in p_tags if
+                       not p.findAll(attrs={'class': "twitter-follow-button"})]
         self.body = '\n'+'\n\n'.join([p.getText() for p in real_p_tags])
